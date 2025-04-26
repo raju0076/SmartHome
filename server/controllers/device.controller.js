@@ -3,7 +3,7 @@ import Room from '../models/room.model.js';
 
 export const createDevice = async (req, res) => {
   try {
-    const { roomId, name, type, features } = req.body;
+    const { roomId, name, type, ...features } = req.body;
 
     const device = await Device.create({
       room: roomId,
