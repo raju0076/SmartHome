@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../utilities/auth';
+import { BASEURL } from '../../baseurl';
 
-const Register = ({ onRegister }) => {
+const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,11 +17,20 @@ const Register = ({ onRegister }) => {
       setError('Please fill in all fields');
       return;
     }
-
-    // Simulate registration
-    auth.login('dummy-token');
-    onRegister();
-    navigate('/');
+   const userObj = {name,email,password};
+   fetch(`${BASEURL}/api/auth/register`,{
+    method:"POST",
+    headers:{
+      "content-type":"application/json",
+    },
+    body:JSON.stringify(userObj)
+   }).then((data)=>{
+    console.log("Data ",data)
+   }).catch((err)=>{
+    console.log("err in signup",err)
+   })
+    
+    // navigate('/');
   };
 
   return (

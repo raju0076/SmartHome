@@ -1,11 +1,11 @@
 export const auth = {
     isAuthenticated: () => {
-      return localStorage.getItem('authToken') !== null;
+      return localStorage.getItem('token') !== null;
     },
     login: (token) => {
-      localStorage.setItem('authToken', token);
+      localStorage.setItem('token', token);
     },
     logout: () => {
-      localStorage.removeItem('authToken');
+      localStorage.removeItem('token');
     }
   };

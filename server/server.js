@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
-// import cors from 'cors';
+import cors from 'cors';
 import connectDB from './configs/mongo.config.js';
 import roomRoutes from './routes/room.routes.js';
 import deviceRoutes from './routes/device.routes.js';
@@ -18,7 +18,7 @@ connectDB();
 const app = express();
 
 // Middleware
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 
 

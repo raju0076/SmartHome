@@ -12,6 +12,7 @@ import SettingsPage from './pages/SettingsPage';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import './App.css';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(auth.isAuthenticated());
@@ -19,7 +20,7 @@ function App() {
   const [rooms, setRooms] = useState([]);
   const [devices, setDevices] = useState([]);
   const [routines, setRoutines] = useState([]);
-
+  console.log("isAuthenticated >>>>",isAuthenticated)
   useEffect(() => {
     if (isAuthenticated) {
       // Simulate loading household data
@@ -110,17 +111,17 @@ function App() {
       <div className="app">
         {isAuthenticated && <Header household={household} onLogout={handleLogout} />}
         <div className="main-content">
-          {isAuthenticated && <Sidebar />}
+        {isAuthenticated &&  <Sidebar /> }
           <div className="content">
             <Routes>
-            <Route path="/" element={isAuthenticated ? <HomePage devices={devices} routines={routines} rooms={rooms} /> : <Navigate to="/login" />} />
-              <Route path="/dashboard" element={isAuthenticated ? <DashboardPage devices={devices} rooms={rooms} updateDevice={updateDevice} /> : <Navigate to="/login" />} />
-              <Route path="/devices" element={isAuthenticated ? <DevicesPage devices={devices} rooms={rooms} addDevice={addDevice} updateDevice={updateDevice} /> : <Navigate to="/login" />} />
-              <Route path="/routines" element={isAuthenticated ? <RoutinesPage routines={routines} devices={devices} addRoutine={addRoutine} /> : <Navigate to="/login" />} />
-              <Route path="/energy" element={isAuthenticated ? <EnergyPage devices={devices} /> : <Navigate to="/login" />} />
-              <Route path="/settings" element={isAuthenticated ? <SettingsPage household={household} rooms={rooms} addRoom={addRoom} /> : <Navigate to="/login" />} />
-              <Route path="/login" element={!isAuthenticated ? <Login onLogin={handleLogin} /> : <Navigate to="/" />} />
-              <Route path="/register" element={!isAuthenticated ? <Register onRegister={handleLogin} /> : <Navigate to="/" />} />
+            <Route path="/home" element={isAuthenticated ? <HomePage devices={devices} routines={routines} rooms={rooms} /> : <Navigate to="/" />} />
+              <Route path="/dashboard" element={isAuthenticated ? <DashboardPage devices={devices} rooms={rooms} updateDevice={updateDevice} /> : <Navigate to="/" />} />
+              <Route path="/devices" element={isAuthenticated ? <DevicesPage devices={devices} rooms={rooms} addDevice={addDevice} updateDevice={updateDevice} /> : <Navigate to="/" />} />
+              <Route path="/routines" element={isAuthenticated ? <RoutinesPage routines={routines} devices={devices} addRoutine={addRoutine} /> : <Navigate to="/" />} />
+              <Route path="/energy" element={isAuthenticated ? <EnergyPage devices={devices} /> : <Navigate to="/" />} />
+              <Route path="/settings" element={isAuthenticated ? <SettingsPage household={household} rooms={rooms} addRoom={addRoom} /> : <Navigate to="/" />} />
+              <Route path="/" element={!isAuthenticated && <LandingPage/>} /> 
+              {/* <Route path="/home" element={<HomePage devices={devices} routines={routines} rooms={rooms}/>}/> */}
             </Routes>
           </div>
         </div>

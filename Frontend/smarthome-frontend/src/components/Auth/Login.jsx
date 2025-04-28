@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../utilities/auth';
+import { BASEURL } from '../../baseurl';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -10,16 +11,24 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simple validation
-    if (!email || !password) {
-      setError('Please fill in all fields');
-      return;
-    }
+    const userObj = {email,password};
+     fetch(`${BASEURL}/api/auth/login`,{
+      method:"POST",
+      headers:{
+        "content-type":"application/json",
+      },
+      body:JSON.stringify(userObj)
+     }).then((res)=>res.json())
+     .then((data)=>{
+      console.log("Data ",data)
+      // localStorage.setItem('token', data.token)
+      auth.login(data.token)
+      navigate('/home');
+     }).catch((err)=>{
+      console.log("err in signup",err.msg)
+     })
 
-    // Simulate authentication
-    auth.login('dummy-token');
-    onLogin();
-    navigate('/');
+
   };
 
   return (

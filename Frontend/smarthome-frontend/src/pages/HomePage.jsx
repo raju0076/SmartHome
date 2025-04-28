@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Login from '../components/Auth/Login';
+import Register from '../components/Auth/Register';
 
 const HomePage = ({ devices, routines, rooms }) => {
   const [stats, setStats] = useState({
@@ -111,3 +113,5 @@ const HomePage = ({ devices, routines, rooms }) => {
 };
 
 export default HomePage;
+
+

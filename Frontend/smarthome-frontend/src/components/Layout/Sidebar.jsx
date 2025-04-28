@@ -5,7 +5,7 @@ const Sidebar = () => {
     <nav className="sidebar">
       <ul>
         <li>
-          <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
+          <NavLink to="/home" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
         </li>
         <li>
           <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''}>Dashboard</NavLink>

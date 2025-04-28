@@ -1,7 +1,7 @@
 import User from '../models/user.model.js';
 import jwt from 'jsonwebtoken';
 
-const generateToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+const generateToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
 // Register user
 export const register = async (req, res) => {
@@ -29,7 +29,7 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    res.json({ token: generateToken(user._id) });
+    res.json({msg:"Login Success!", token: generateToken(user._id) });
   } catch (error) {
     res.status(500).json({ message: 'Login failed', error: error.message });
   }

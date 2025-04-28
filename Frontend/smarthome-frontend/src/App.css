@@ -5,6 +5,12 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.landing-page{
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -29,7 +35,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 600px;
   background-color: #f0f2f5;
 }
 
